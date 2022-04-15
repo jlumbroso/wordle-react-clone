@@ -1,5 +1,7 @@
-import React, { ReactPropTypes } from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types';
+
+import { AppContext } from '../App'
 
 type Props = {
     letterPos: number,
@@ -7,8 +9,11 @@ type Props = {
 }
 
 function Letter({letterPos, attemptVal}: Props) {
+  // @ts-ignore
+  const { board } = useContext(AppContext)
+  const letter = board[attemptVal][letterPos];
   return (
-    <div>Letter</div>
+    <div className="letter">{letter}</div>
   )
 }
 

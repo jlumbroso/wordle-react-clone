@@ -6,6 +6,7 @@ import Letter from "./Letter"
 type Props = {}
 
 function Board({}: Props) {
+  const [board, setBoard] = useState(boardDefault)
   return (
     <div className="board">
         {" "}
