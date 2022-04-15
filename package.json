@@ -1,7 +1,7 @@
 {
-  "name": "react-ts-starter",
+  "name": "wordle-react-clone",
   "version": "0.1.0",
-  "homepage": "https://jlumbroso.github.io/react-ts-starter",
+  "homepage": "https://jlumbroso.github.io/wordle-react-clone",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
