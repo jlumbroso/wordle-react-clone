@@ -38,7 +38,7 @@ nav h1 {
 
 .board {
   width: 16em;
-  height: 36em;
+  height: 22em;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
