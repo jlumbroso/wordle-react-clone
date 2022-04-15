@@ -27,7 +27,7 @@ function Keyboard({}: Props) {
           }
         })
     }
-  }, [onDelete, onEnter, onSelectLetter])
+  }, [onDelete, onEnter, onSelectLetter, keys])
   
 
   useEffect(() => {
