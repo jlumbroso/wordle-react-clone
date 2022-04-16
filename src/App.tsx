@@ -1,8 +1,8 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 import './App.css';
 
-import { boardDefault } from "./helpers"
+import { boardDefault, generateWordSet } from "./helpers"
 import Board from "./components/Board"
 import Keyboard from "./components/Keyboard"
 
@@ -14,8 +14,18 @@ function App() {
   const [currAttempt, setCurrAttempt] = useState({
     attempt: 0, letterPos: 0,
   })
+  const [wordSet, setWordSet] = useState(new Set())
+  const [disabledLetters, setDisabledLetters] = useState([])
 
   const correctWord = "RIGHT"
+
+  // generate set once (by empty deps)
+  useEffect(() => {
+    generateWordSet().then((words) => {
+      // @ts-ignore
+      setWordSet(words.wordSet)
+    })
+  }, [])
 
   const onSelectLetter = (key: string) => {
     if(currAttempt.letterPos >= 5) return;
@@ -41,6 +51,10 @@ function App() {
   const onEnter = () => {
     console.log(currAttempt)
     if (currAttempt.letterPos !== 5) return;
+
+    let currWord = board[currAttempt.attempt].join("").toUpperCase();
+    if (!wordSet.has(currWord)) return alert("Word not found")
+
     setCurrAttempt({
       attempt: currAttempt.attempt + 1,
       letterPos: 0,
@@ -61,6 +75,8 @@ function App() {
         onEnter,
         onSelectLetter,
         correctWord,
+        disabledLetters,
+        setDisabledLetters,
       }}>
         <div className="game">
           <Board />

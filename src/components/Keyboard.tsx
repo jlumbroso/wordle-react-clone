@@ -13,7 +13,7 @@ const keys = [...keys1, ...keys2, ...keys3]
 function Keyboard({}: Props) {
 
   // @ts-ignore
-  const { onDelete, onEnter, onSelectLetter } = useContext(AppContext)
+  const { onDelete, onEnter, onSelectLetter, disabledLetters } = useContext(AppContext)
 
   const handleKeyboard = useCallback((event: KeyboardEvent) => {
     switch(event.key) {
@@ -42,15 +42,15 @@ function Keyboard({}: Props) {
   return (
     <div className="keyboard">
       <div className="line1">{keys1.map((key) => {
-        return <Key keyVal={key}/>
+        return <Key keyVal={key} disabled={disabledLetters.includes(key)}/>
       })}</div>
       <div className="line2">{keys2.map((key) => {
-        return <Key keyVal={key}/>
+        return <Key keyVal={key} disabled={disabledLetters.includes(key)}/>
       })}</div>
       <div className="line3">
         <Key keyVal={"ENTER"} bigKey/>
         {keys3.map((key) => {
-          return <Key keyVal={key}/>
+          return <Key keyVal={key} disabled={disabledLetters.includes(key)}/>
         })}
         <Key keyVal={"DELETE"} bigKey/>
       </div>

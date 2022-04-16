@@ -4,9 +4,10 @@ import { AppContext } from '../App'
 type Props = {
     keyVal: string,
     bigKey?: boolean,
+    disabled?: boolean,
 }
 
-function Key({keyVal, bigKey}: Props) {
+function Key({keyVal, bigKey, disabled}: Props) {
 
   // @ts-ignore
   const { onDelete, onEnter, onSelectLetter } = useContext(AppContext)
@@ -21,7 +22,11 @@ function Key({keyVal, bigKey}: Props) {
     }
   }
   return (
-    <div className="key" id={bigKey ? "big" : ""} onClick={selectLetter}>
+    <div
+      className="key"
+      id={bigKey ? "big" : disabled ? "disabled" : ""}
+      onClick={selectLetter}
+    >
       {keyVal}
     </div>
   )
