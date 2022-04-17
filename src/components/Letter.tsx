@@ -10,7 +10,7 @@ type Props = {
 
 function Letter({letterPos, attemptVal}: Props) {
   // @ts-ignore
-  const { board, currAttempt, correctWord, disabledLetters, setDisabledLetters } = useContext(AppContext)
+  const { board, currAttempt, correctWord, setDisabledLetters } = useContext(AppContext)
   const letter = board[attemptVal][letterPos];
 
   // compute color
@@ -26,8 +26,10 @@ function Letter({letterPos, attemptVal}: Props) {
   }
 
   useEffect(() => {
-    if (letter !== "" && !correct && !almost) {
-      setDisabledLetters([...disabledLetters, letter])
+    if (currAttempt.attempt > attemptVal) {
+      if (letter !== "" && !correct && !almost) {
+        setDisabledLetters((prev:Array<string>) => [...prev, letter])
+      }
     }
   })
 
