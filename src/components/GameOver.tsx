@@ -4,7 +4,6 @@ import { AppContext } from "../App";
 type Props = {};
 
 function GameOver({}: Props) {
-  // @ts-ignore
   const { gameOver, currAttempt, correctWord } = React.useContext(AppContext);
   return (
     <div className="gameOver">

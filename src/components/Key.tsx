@@ -1,16 +1,14 @@
-import React, { useContext } from 'react'
-import { AppContext } from '../App'
+import React, { useContext } from "react";
+import { AppContext } from "../App";
 
 type Props = {
-    keyVal: string,
-    bigKey?: boolean,
-    disabled?: boolean,
-}
+  keyVal: string;
+  bigKey?: boolean;
+  disabled?: boolean;
+};
 
-function Key({keyVal, bigKey, disabled}: Props) {
-
-  // @ts-ignore
-  const { onDelete, onEnter, onSelectLetter } = useContext(AppContext)
+function Key({ keyVal, bigKey, disabled }: Props) {
+  const { onDelete, onEnter, onSelectLetter } = useContext(AppContext);
 
   const selectLetter = () => {
     if (keyVal === "DELETE") {
@@ -20,7 +18,7 @@ function Key({keyVal, bigKey, disabled}: Props) {
     } else {
       onSelectLetter(keyVal);
     }
-  }
+  };
   return (
     <div
       className="key"
@@ -29,7 +27,7 @@ function Key({keyVal, bigKey, disabled}: Props) {
     >
       {keyVal}
     </div>
-  )
+  );
 }
 
-export default Key
+export default Key;

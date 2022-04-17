@@ -1,4 +1,10 @@
-import { createContext, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 
 import "./App.css";
 
@@ -7,8 +13,28 @@ import Board from "./components/Board";
 import Keyboard from "./components/Keyboard";
 import GameOver from "./components/GameOver";
 
-// @ts-ignore
-export const AppContext = createContext();
+export interface IWordleGameContext {
+  board: string[][];
+  setBoard: Dispatch<SetStateAction<string[][]>>;
+  currAttempt: { attempt: number; letterPos: number };
+  setCurrAttempt: Dispatch<
+    SetStateAction<{ attempt: number; letterPos: number }>
+  >;
+  onDelete: () => void;
+  onEnter: () => void;
+  onSelectLetter: (key: string) => void;
+  correctWord: string;
+  disabledLetters: string[];
+  setDisabledLetters: Dispatch<SetStateAction<string[]>>;
+  gameOver: { gameOver: boolean; guessedWord: boolean };
+  setGameOver: Dispatch<
+    SetStateAction<{ gameOver: boolean; guessedWord: boolean }>
+  >;
+}
+
+export const AppContext = createContext<IWordleGameContext>(
+  {} as IWordleGameContext
+);
 
 function App() {
   const [board, setBoard] = useState(boardDefault);
@@ -17,7 +43,7 @@ function App() {
     letterPos: 0,
   });
   const [wordSet, setWordSet] = useState(new Set());
-  const [disabledLetters, setDisabledLetters] = useState([]);
+  const [disabledLetters, setDisabledLetters] = useState<string[]>([]);
   const [gameOver, setGameOver] = useState({
     gameOver: false,
     guessedWord: false,
@@ -29,9 +55,7 @@ function App() {
   // generate set once (by empty deps)
   useEffect(() => {
     generateWordSet().then((words) => {
-      // @ts-ignore
       setWordSet(words.wordSet);
-      // @ts-ignore
       setCorrectWord(getRandomItemFromSet(words.wordSet));
     });
   }, []);
@@ -41,7 +65,6 @@ function App() {
     const newBoard = [...board];
     newBoard[currAttempt.attempt][currAttempt.letterPos] = key;
     setBoard(newBoard);
-    // @ts-ignore
     setCurrAttempt({ ...currAttempt, letterPos: currAttempt.letterPos + 1 });
   };
 

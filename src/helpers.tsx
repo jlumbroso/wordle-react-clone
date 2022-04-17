@@ -9,8 +9,8 @@ export const boardDefault = [
   ["", "", "", "", ""],
 ];
 
-export const generateWordSet = async () => {
-  let wordSet;
+export async function generateWordSet(): Promise<{ wordSet: Set<string> }> {
+  let wordSet: Set<string> = new Set();
   await fetch(wordBank)
     .then((response) => response.text())
     .then((result) => {
@@ -18,7 +18,7 @@ export const generateWordSet = async () => {
       wordSet = new Set(wordArr);
     });
   return { wordSet };
-};
+}
 
 export function getRandomItemFromSet<X>(set: Set<X>) {
   const arr = Array.from(set.keys());
