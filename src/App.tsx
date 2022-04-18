@@ -83,8 +83,11 @@ function App() {
     let currWord = board[currAttempt.attempt].join("").toUpperCase()
     if (!wordSet.has(currWord)) return alert("Word not found")
 
+    // defining here because it won't be refreshed after the setCurrAttempt
+    const nextAttemptCount = currAttempt.attempt + 1
+
     setCurrAttempt({
-      attempt: currAttempt.attempt + 1,
+      attempt: nextAttemptCount,
       letterPos: 0,
     })
 
@@ -92,6 +95,11 @@ function App() {
       setGameOver({
         gameOver: true,
         guessedWord: true,
+      })
+    } else if (nextAttemptCount == 6) {
+      setGameOver({
+        gameOver: true,
+        guessedWord: false,
       })
     }
   }
