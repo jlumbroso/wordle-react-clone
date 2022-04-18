@@ -96,7 +96,7 @@ function App() {
         gameOver: true,
         guessedWord: true,
       })
-    } else if (nextAttemptCount == 6) {
+    } else if (nextAttemptCount === 6) {
       setGameOver({
         gameOver: true,
         guessedWord: false,
