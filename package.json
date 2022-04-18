@@ -36,6 +36,18 @@
       "@typescript-eslint/no-unused-vars": 0 
     }
   },
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "printWidth": 80,
+    "singleQuote": false,
+    "bracketSameLine": false,
+    "bracketSpacing": true,
+    "semi": false,
+    "trailingComma": "es5",
+    "arrowParens": "always",
+    "endOfLine": "lf"
+  },
   "browserslist": {
     "production": [
       ">0.2%",

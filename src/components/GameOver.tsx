@@ -1,10 +1,10 @@
-import React from "react";
-import { AppContext } from "../App";
+import React from "react"
+import { AppContext } from "../App"
 
-type Props = {};
+type Props = {}
 
 function GameOver({}: Props) {
-  const { gameOver, currAttempt, correctWord } = React.useContext(AppContext);
+  const { gameOver, currAttempt, correctWord } = React.useContext(AppContext)
   return (
     <div className="gameOver">
       <h3>{gameOver.guessedWord ? "You correctly guessed" : "You failed"}</h3>
@@ -15,7 +15,7 @@ function GameOver({}: Props) {
         ""
       )}
     </div>
-  );
+  )
 }
 
-export default GameOver;
+export default GameOver
