@@ -3,14 +3,12 @@ import React, { useCallback, useContext, useEffect } from "react"
 import { AppContext } from "../App"
 import Key from "./Key"
 
-type Props = {}
-
 const keys1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
 const keys2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"]
 const keys3 = ["Z", "X", "C", "V", "B", "N", "M"]
 const keys = [...keys1, ...keys2, ...keys3]
 
-function Keyboard({}: Props) {
+function Keyboard() {
   const { onDelete, onEnter, onSelectLetter, disabledLetters } =
     useContext(AppContext)
 

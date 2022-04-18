@@ -1,12 +1,10 @@
-import React, { useState } from "react"
-import { boardDefault } from "../helpers"
-
 import Letter from "./Letter"
 
-type Props = {}
+// NOTE: will require reimporting some global objects
+// to extend this to have customizable word length or
+// number of tries.
 
-function Board({}: Props) {
-  const [board, setBoard] = useState(boardDefault)
+function Board() {
   return (
     <div className="board">
       {" "}

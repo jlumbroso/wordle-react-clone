@@ -1,9 +1,7 @@
 import React from "react"
 import { AppContext } from "../App"
 
-type Props = {}
-
-function GameOver({}: Props) {
+function GameOver() {
   const { gameOver, currAttempt, correctWord } = React.useContext(AppContext)
   return (
     <div className="gameOver">
