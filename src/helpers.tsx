@@ -1,4 +1,4 @@
-import wordBank from "./wordle-bank.txt"
+import wordBank from "./wordle-nytimes-bank.txt"
 
 export const boardDefault = [
   ["", "", "", "", ""],
