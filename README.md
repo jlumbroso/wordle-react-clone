@@ -4,9 +4,7 @@ _This repository was generated from the [`react-ts-starter`](https://github.com/
 
 This repository contains a clone of the popular Wordle game in React, as spec'ed out and narrated by [@machadop1407](https://github.com/machadop1407) (see the [repo](https://github.com/machadop1407/Wordle-Clone-React/) and [corresponding video tutorial](https://www.youtube.com/watch?v=WDTNwmXUz2c&ab_channel=PedroTech)). The original project in is JavaScript, and this repository is in TypeScript, so some care was taken to ensure general correctness of the types — and `// @ts-ignore` is used as a temporary placeholders in some places.
 
-:-------------------------:|:-------------------------:
 ![](https://raw.githubusercontent.com/jlumbroso/wordle-react-clone/master/public/screenshot-wordle-v1-a.png) | ![](https://raw.githubusercontent.com/jlumbroso/wordle-react-clone/master/public/screenshot-wordle-v1-a.png)
-:-------------------------:|:-------------------------:
 
 ## Design Notes
 
