@@ -11,7 +11,7 @@ import "./App.css"
 import {
   boardDefault,
   boardStatusDefault,
-  computeStatus,
+  computeGuessStatus,
   generateWordSet,
   getRandomItemFromSet,
   LetterStatus,
@@ -95,21 +95,11 @@ function App() {
 
     // compute the status of the letters
     const newBoardStatus = [...boardStatus]
-    newBoardStatus[currAttempt.attempt] = computeStatus(currWord, correctWord)
+    newBoardStatus[currAttempt.attempt] = computeGuessStatus(
+      currWord,
+      correctWord
+    )
     setBoardStatus(newBoardStatus)
-
-    // update their status globally
-    // let newLetterStatus = new Map<string, LetterStatus>(letterStatus)
-    // for (let attempt = 0; attempt < currAttempt.attempt; attempt++) {
-    //   for (let letterPos = 0; letterPos < 5; letterPos++) {
-    //     const letter = board[attempt][letterPos]
-    //     const oldStatus = newLetterStatus.get(letter) || LetterStatus.Unknown
-    //     const newStatus = boardStatus[attempt][letterPos]
-    //     if (oldStatus < newStatus) newLetterStatus.set(letter, newStatus)
-    //   }
-    // }
-    // console.log(newLetterStatus)
-    // setLetterStatus(newLetterStatus)
 
     // defining here because it won't be refreshed after the setCurrAttempt
     const nextAttemptCount = currAttempt.attempt + 1

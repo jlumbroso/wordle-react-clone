@@ -7,7 +7,7 @@ export enum LetterStatus {
   Disabled = 1,
 }
 
-export function computeStatus(
+export function computeGuessStatus(
   guess: string,
   correctWord: string
 ): Array<LetterStatus> {
