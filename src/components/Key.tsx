@@ -1,5 +1,6 @@
 import React, { useContext } from "react"
 import { AppContext } from "../App"
+import { LetterStatus } from "../helpers"
 
 type Props = {
   keyVal: string
@@ -8,7 +9,8 @@ type Props = {
 }
 
 function Key({ keyVal, bigKey, disabled }: Props) {
-  const { onDelete, onEnter, onSelectLetter } = useContext(AppContext)
+  const { onDelete, onEnter, onSelectLetter, letterStatus } =
+    useContext(AppContext)
 
   const selectLetter = () => {
     if (keyVal === "DELETE") {
@@ -19,10 +21,27 @@ function Key({ keyVal, bigKey, disabled }: Props) {
       onSelectLetter(keyVal)
     }
   }
+
+  let letterState = ""
+  let status = letterStatus.get(keyVal) || LetterStatus.Unknown
+  switch (status) {
+    case LetterStatus.Letter:
+      letterState = "almost"
+      break
+    case LetterStatus.LetterAndPosition:
+      letterState = "correct"
+      break
+    case LetterStatus.Disabled:
+      letterState = "error"
+      break
+    default:
+      break
+  }
+
   return (
     <div
       className="key"
-      id={bigKey ? "big" : disabled ? "disabled" : ""}
+      id={bigKey ? "big" : letterState}
       onClick={selectLetter}
     >
       {keyVal}

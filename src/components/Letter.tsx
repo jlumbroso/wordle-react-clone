@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react"
 
 import { AppContext } from "../App"
+import { LetterStatus } from "../helpers"
 
 type Props = {
   letterPos: number
@@ -8,29 +9,52 @@ type Props = {
 }
 
 function Letter({ letterPos, attemptVal }: Props) {
-  const { board, currAttempt, correctWord, setDisabledLetters } =
-    useContext(AppContext)
+  const {
+    board,
+    boardStatus,
+    currAttempt,
+    correctWord,
+    disabledLetters,
+    setDisabledLetters,
+    letterStatus,
+    setLetterStatus,
+  } = useContext(AppContext)
   const letter = board[attemptVal][letterPos]
 
   // compute color
   let letterState = ""
-
-  const correct = correctWord[letterPos] === letter
-  const almost = correctWord.includes(letter)
+  let status = LetterStatus.Unknown
 
   if (currAttempt.attempt > attemptVal) {
-    letterState = "error"
-    if (correct) letterState = "correct"
-    else if (almost) letterState = "almost"
+    status = boardStatus[attemptVal][letterPos]
+
+    switch (status) {
+      case LetterStatus.Letter:
+        letterState = "almost"
+        break
+      case LetterStatus.LetterAndPosition:
+        letterState = "correct"
+        break
+      case LetterStatus.Disabled:
+        letterState = "error"
+        break
+      default:
+        break
+    }
   }
 
   useEffect(() => {
     if (currAttempt.attempt > attemptVal) {
-      if (letter !== "" && !correct && !almost) {
-        setDisabledLetters((prev: string[]) => [...prev, letter])
+      let newLetterStatus = new Map<string, LetterStatus>(letterStatus)
+      const oldStatus = newLetterStatus.get(letter) || LetterStatus.Unknown
+      const newStatus = boardStatus[attemptVal][letterPos]
+      if (oldStatus < newStatus) {
+        newLetterStatus.set(letter, newStatus)
+        console.log(newLetterStatus)
+        setLetterStatus(newLetterStatus)
       }
     }
-  })
+  }, [currAttempt, letterStatus])
 
   return (
     <div className="letter" id={letterState}>

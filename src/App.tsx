@@ -8,7 +8,14 @@ import {
 
 import "./App.css"
 
-import { boardDefault, generateWordSet, getRandomItemFromSet } from "./helpers"
+import {
+  boardDefault,
+  boardStatusDefault,
+  computeStatus,
+  generateWordSet,
+  getRandomItemFromSet,
+  LetterStatus,
+} from "./helpers"
 import Board from "./components/Board"
 import Keyboard from "./components/Keyboard"
 import GameOver from "./components/GameOver"
@@ -16,6 +23,8 @@ import GameOver from "./components/GameOver"
 export interface IWordleGameContext {
   board: string[][]
   setBoard: Dispatch<SetStateAction<string[][]>>
+  boardStatus: LetterStatus[][]
+  setBoardStatus: Dispatch<SetStateAction<LetterStatus[][]>>
   currAttempt: { attempt: number; letterPos: number }
   setCurrAttempt: Dispatch<
     SetStateAction<{ attempt: number; letterPos: number }>
@@ -24,6 +33,8 @@ export interface IWordleGameContext {
   onEnter: () => void
   onSelectLetter: (key: string) => void
   correctWord: string
+  letterStatus: Map<string, LetterStatus>
+  setLetterStatus: Dispatch<SetStateAction<Map<string, LetterStatus>>>
   disabledLetters: string[]
   setDisabledLetters: Dispatch<SetStateAction<string[]>>
   gameOver: { gameOver: boolean; guessedWord: boolean }
@@ -38,11 +49,13 @@ export const AppContext = createContext<IWordleGameContext>(
 
 function App() {
   const [board, setBoard] = useState(boardDefault)
+  const [boardStatus, setBoardStatus] = useState(boardStatusDefault)
   const [currAttempt, setCurrAttempt] = useState({
     attempt: 0,
     letterPos: 0,
   })
   const [wordSet, setWordSet] = useState(new Set())
+  const [letterStatus, setLetterStatus] = useState(new Map())
   const [disabledLetters, setDisabledLetters] = useState<string[]>([])
   const [gameOver, setGameOver] = useState({
     gameOver: false,
@@ -83,6 +96,24 @@ function App() {
     let currWord = board[currAttempt.attempt].join("").toUpperCase()
     if (!wordSet.has(currWord)) return alert("Word not found")
 
+    // compute the status of the letters
+    const newBoardStatus = [...boardStatus]
+    newBoardStatus[currAttempt.attempt] = computeStatus(currWord, correctWord)
+    setBoardStatus(newBoardStatus)
+
+    // update their status globally
+    // let newLetterStatus = new Map<string, LetterStatus>(letterStatus)
+    // for (let attempt = 0; attempt < currAttempt.attempt; attempt++) {
+    //   for (let letterPos = 0; letterPos < 5; letterPos++) {
+    //     const letter = board[attempt][letterPos]
+    //     const oldStatus = newLetterStatus.get(letter) || LetterStatus.Unknown
+    //     const newStatus = boardStatus[attempt][letterPos]
+    //     if (oldStatus < newStatus) newLetterStatus.set(letter, newStatus)
+    //   }
+    // }
+    // console.log(newLetterStatus)
+    // setLetterStatus(newLetterStatus)
+
     // defining here because it won't be refreshed after the setCurrAttempt
     const nextAttemptCount = currAttempt.attempt + 1
 
@@ -113,12 +144,16 @@ function App() {
         value={{
           board,
           setBoard,
+          boardStatus,
+          setBoardStatus,
           currAttempt,
           setCurrAttempt,
           onDelete,
           onEnter,
           onSelectLetter,
           correctWord,
+          letterStatus,
+          setLetterStatus,
           disabledLetters,
           setDisabledLetters,
           gameOver,
