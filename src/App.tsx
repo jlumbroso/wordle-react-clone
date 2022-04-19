@@ -12,7 +12,8 @@ import {
   boardDefault,
   boardStatusDefault,
   computeGuessStatus,
-  generateWordSet,
+  generateAcceptableWordSet,
+  generateMainWordSet,
   getRandomItemFromSet,
   LetterStatus,
 } from "./helpers"
@@ -64,9 +65,13 @@ function App() {
 
   // generate set once (by empty deps)
   useEffect(() => {
-    generateWordSet().then((words) => {
+    // this is the word bank of acceptable words
+    generateAcceptableWordSet().then((words) => {
       setWordSet(words.wordSet)
-      setCorrectWord(getRandomItemFromSet(words.wordSet))
+    })
+    // to make guesses easier, this is the word bank of "common" words
+    generateMainWordSet().then((wordsy) => {
+      setCorrectWord(getRandomItemFromSet(wordsy.wordSet))
     })
   }, [])
 

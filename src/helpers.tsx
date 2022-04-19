@@ -1,4 +1,5 @@
-import wordBank from "./wordle-nytimes-bank.txt"
+import wordMainBank from "./wordle-nytimes-main-bank.txt"
+import wordAcceptableBank from "./wordle-nytimes-acceptable-bank.txt"
 
 export enum LetterStatus {
   Unknown = 0,
@@ -113,7 +114,9 @@ export const boardStatusDefault = [
   ],
 ]
 
-export async function generateWordSet(): Promise<{ wordSet: Set<string> }> {
+async function generateWordSetFromWordBank(
+  wordBank: string
+): Promise<{ wordSet: Set<string> }> {
   let wordSet: Set<string> = new Set()
   await fetch(wordBank)
     .then((response) => response.text())
@@ -121,6 +124,22 @@ export async function generateWordSet(): Promise<{ wordSet: Set<string> }> {
       const wordArr = result.toUpperCase().split("\n")
       wordSet = new Set(wordArr)
     })
+  return { wordSet }
+}
+
+export async function generateAcceptableWordSet(): Promise<{
+  wordSet: Set<string>
+}> {
+  let wordSet: Set<string> = new Set()
+  let response = await generateWordSetFromWordBank(wordAcceptableBank)
+  wordSet = response.wordSet
+  return { wordSet }
+}
+
+export async function generateMainWordSet(): Promise<{ wordSet: Set<string> }> {
+  let wordSet: Set<string> = new Set()
+  let response = await generateWordSetFromWordBank(wordMainBank)
+  wordSet = response.wordSet
   return { wordSet }
 }
 
