@@ -51,7 +51,15 @@ function Letter({ letterPos, attemptVal }: Props) {
         setLetterStatus(newLetterStatus)
       }
     }
-  }, [currAttempt, letterStatus])
+  }, [
+    currAttempt,
+    letterStatus,
+    attemptVal,
+    boardStatus,
+    letter,
+    letterPos,
+    setLetterStatus,
+  ])
 
   return (
     <div className="letter" id={letterState}>
