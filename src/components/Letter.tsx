@@ -48,7 +48,6 @@ function Letter({ letterPos, attemptVal }: Props) {
       const newStatus = boardStatus[attemptVal][letterPos]
       if (oldStatus < newStatus) {
         newLetterStatus.set(letter, newStatus)
-        console.log(newLetterStatus)
         setLetterStatus(newLetterStatus)
       }
     }

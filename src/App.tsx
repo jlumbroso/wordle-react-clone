@@ -87,7 +87,6 @@ function App() {
   }
 
   const onEnter = () => {
-    console.log(currAttempt)
     if (currAttempt.letterPos !== 5) return
 
     let currWord = board[currAttempt.attempt].join("").toUpperCase()
