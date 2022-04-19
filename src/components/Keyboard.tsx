@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect } from "react"
 
 import { AppContext } from "../App"
+import { LetterStatus } from "../helpers"
 import Key from "./Key"
 
 const keys1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
@@ -16,7 +17,6 @@ function Keyboard() {
     board,
     boardStatus,
     letterStatus,
-    disabledLetters,
   } = useContext(AppContext)
 
   const handleKeyboard = useCallback(
@@ -49,18 +49,33 @@ function Keyboard() {
     <div className="keyboard">
       <div className="line1">
         {keys1.map((key) => {
-          return <Key keyVal={key} disabled={disabledLetters.includes(key)} />
+          return (
+            <Key
+              keyVal={key}
+              status={letterStatus.get(key) || LetterStatus.Unknown}
+            />
+          )
         })}
       </div>
       <div className="line2">
         {keys2.map((key) => {
-          return <Key keyVal={key} disabled={disabledLetters.includes(key)} />
+          return (
+            <Key
+              keyVal={key}
+              status={letterStatus.get(key) || LetterStatus.Unknown}
+            />
+          )
         })}
       </div>
       <div className="line3">
         <Key keyVal={"ENTER"} bigKey />
         {keys3.map((key) => {
-          return <Key keyVal={key} disabled={disabledLetters.includes(key)} />
+          return (
+            <Key
+              keyVal={key}
+              status={letterStatus.get(key) || LetterStatus.Unknown}
+            />
+          )
         })}
         <Key keyVal={"DELETE"} bigKey />
       </div>

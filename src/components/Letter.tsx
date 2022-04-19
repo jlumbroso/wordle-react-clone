@@ -14,8 +14,6 @@ function Letter({ letterPos, attemptVal }: Props) {
     boardStatus,
     currAttempt,
     correctWord,
-    disabledLetters,
-    setDisabledLetters,
     letterStatus,
     setLetterStatus,
   } = useContext(AppContext)

@@ -35,8 +35,6 @@ export interface IWordleGameContext {
   correctWord: string
   letterStatus: Map<string, LetterStatus>
   setLetterStatus: Dispatch<SetStateAction<Map<string, LetterStatus>>>
-  disabledLetters: string[]
-  setDisabledLetters: Dispatch<SetStateAction<string[]>>
   gameOver: { gameOver: boolean; guessedWord: boolean }
   setGameOver: Dispatch<
     SetStateAction<{ gameOver: boolean; guessedWord: boolean }>
@@ -56,7 +54,6 @@ function App() {
   })
   const [wordSet, setWordSet] = useState(new Set())
   const [letterStatus, setLetterStatus] = useState(new Map())
-  const [disabledLetters, setDisabledLetters] = useState<string[]>([])
   const [gameOver, setGameOver] = useState({
     gameOver: false,
     guessedWord: false,
@@ -154,8 +151,6 @@ function App() {
           correctWord,
           letterStatus,
           setLetterStatus,
-          disabledLetters,
-          setDisabledLetters,
           gameOver,
           setGameOver,
         }}

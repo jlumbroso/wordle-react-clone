@@ -5,12 +5,11 @@ import { LetterStatus } from "../helpers"
 type Props = {
   keyVal: string
   bigKey?: boolean
-  disabled?: boolean
+  status?: LetterStatus
 }
 
-function Key({ keyVal, bigKey, disabled }: Props) {
-  const { onDelete, onEnter, onSelectLetter, letterStatus } =
-    useContext(AppContext)
+function Key({ keyVal, bigKey, status }: Props) {
+  const { onDelete, onEnter, onSelectLetter } = useContext(AppContext)
 
   const selectLetter = () => {
     if (keyVal === "DELETE") {
@@ -23,7 +22,6 @@ function Key({ keyVal, bigKey, disabled }: Props) {
   }
 
   let letterState = ""
-  let status = letterStatus.get(keyVal) || LetterStatus.Unknown
   switch (status) {
     case LetterStatus.Letter:
       letterState = "almost"
