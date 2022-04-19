@@ -12,6 +12,10 @@ Here are some of the things I changed with respect to the original tutorial.
 
 - The originally provided word bank only contains about 2315 five-letter words, and omits a lot of plurals. This project now uses the New York Times word bank (this is the original Wordle word bank, [with some spring cleaning](https://arstechnica.com/gaming/2022/02/heres-how-the-new-york-times-changed-wordle/)).
 
+- The original project does not colorize multiple occurrence of a letter in a guess accurately, [the `computeStatusGuess` algorithm is correct](https://github.com/jlumbroso/wordle-react-clone/blob/b13b0ceed3c9774775c74d5f383f2375ee83e496/src/helpers.tsx#L10-L60).
+
+- The original project only allowed for keyboard keys to be either unknown or disabled, this project extends [the possible states to "almost" (correct letter but not position) and "correct" (correct letter and position)](https://github.com/jlumbroso/wordle-react-clone/blob/b13b0ceed3c9774775c74d5f383f2375ee83e496/src/components/Key.tsx#L24-L47).
+
 ## Coding Notes
 
 The original video tutorial uses JavaScript, therefore using TypeScript required some adjustments — but fortunately, not as many as I had expected!
@@ -45,7 +49,3 @@ The original video tutorial uses JavaScript, therefore using TypeScript required
     See [StackOverflow](https://stackoverflow.com/a/57156718/408734) and [Webpack's documentation](https://webpack.js.org/guides/typescript/#importing-other-assets) for more information.
 
 - Since initially this project contains no tests, I had to tweak the Continuous Integration script (in [`gh-deploy.yaml`](https://github.com/jlumbroso/wordle-react-clone/blob/de34f557f058558fb85916a1291508841f590d69/.github/workflows/gh-deploy.yaml#L42)) to change `npm test` to `npm test -- --passWithNoTests` (otherwise, this testing part of the process sees the absence of tests as a failing error).
-
-## Future Changes
-
-- Fix the keyboard so that it doesn't just disable letters (but keeps track of `"correct"` and `"almost"` letters too).
