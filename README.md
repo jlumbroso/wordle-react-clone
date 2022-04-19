@@ -10,7 +10,7 @@ This repository contains a clone of the popular Wordle game in React, as spec'ed
 
 Here are some of the things I changed with respect to the original tutorial.
 
-- The originally provided word bank only contains about 2315 five-letter words, and omits a lot of plurals. This project now uses the New York Times word bank (this is the original Wordle word bank, [with some spring cleaning](https://arstechnica.com/gaming/2022/02/heres-how-the-new-york-times-changed-wordle/)).
+- The originally provided word bank only contains about 2315 five-letter words, and omits a lot of plurals. This project now uses the New York Times word bank (this is the original Wordle word bank, [with some spring cleaning](https://arstechnica.com/gaming/2022/02/heres-how-the-new-york-times-changed-wordle/)), and [splits the lists](https://github.com/jlumbroso/wordle-react-clone/blob/4b6add69e63412ca5ddae7ed123bbb48f6d2aa06/src/helpers.tsx#L130-L144) into a set of "common" words from which to draw solutions, and a set of "acceptable" words from which to accept guesses.
 
 - The original project does not colorize multiple occurrence of a letter in a guess accurately, [the `computeStatusGuess` algorithm is correct](https://github.com/jlumbroso/wordle-react-clone/blob/b13b0ceed3c9774775c74d5f383f2375ee83e496/src/helpers.tsx#L10-L60).
 
