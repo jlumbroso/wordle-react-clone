@@ -21,6 +21,11 @@ function Keyboard() {
 
   const handleKeyboard = useCallback(
     (event: KeyboardEvent) => {
+      // ignore composed events involving meta or ctrl
+      if (event.metaKey || event.ctrlKey) {
+        return
+      }
+
       switch (event.key) {
         case "Enter":
           return onEnter()
