@@ -10,11 +10,13 @@
 body {
   padding: 0%;
   margin: 0;
+  /* NOTE: investigate https://github.com/willmcpo/body-scroll-lock is this is insufficient */
+  overflow: hidden;
 }
 
 nav {
   height: 3.75em;
-  width: 25em;
+  width: 100vw;
   margin: auto;
   border-bottom: 2px solid lightgrey;
   display: grid;
