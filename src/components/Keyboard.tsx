@@ -51,7 +51,7 @@ function Keyboard() {
   })
 
   return (
-    <div className="keyboard">
+    <div className="keyboard" data-testid="keyboard">
       <div className="line1">
         {keys1.map((key) => {
           return (
