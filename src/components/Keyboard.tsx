@@ -56,6 +56,7 @@ function Keyboard() {
         {keys1.map((key) => {
           return (
             <Key
+              key={key}
               keyVal={key}
               status={letterStatus.get(key) || LetterStatus.Unknown}
             />
@@ -66,6 +67,7 @@ function Keyboard() {
         {keys2.map((key) => {
           return (
             <Key
+              key={key}
               keyVal={key}
               status={letterStatus.get(key) || LetterStatus.Unknown}
             />
@@ -77,6 +79,7 @@ function Keyboard() {
         {keys3.map((key) => {
           return (
             <Key
+              key={key}
               keyVal={key}
               status={letterStatus.get(key) || LetterStatus.Unknown}
             />
